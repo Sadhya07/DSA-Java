@@ -45,6 +45,15 @@ public class preInPost {
         nthLevel(root.left, n-1);
         nthLevel(root.right, n-1);
     }
+    public static void nthLevel2(Node root, int n){
+        if(root == null) return;
+        if(n==1){
+            System.out.print(root.val + " ");
+            return;
+        } 
+        nthLevel2(root.right, n-1);
+        nthLevel2(root.left, n-1);
+    }
     public static void bfs(Node root){ //Iterative
         Queue<Node> q=new LinkedList<>();
         if(root !=null) q.add(root);
@@ -78,10 +87,17 @@ public class preInPost {
         // postorder(root);
         // nthLevel(root,1);
         int level = height(root) +1;
-        for(int i=1; i<=level; i++){  //logn
-            nthLevel(root, i); // O(n)
-            System.out.println(); 
-        } //T.C : O(nlogn)
+        // for(int i=1; i<=level; i++){  //logn
+        //     nthLevel(root, i); // O(n)
+        //     System.out.println(); 
+        // } //T.C : O(nlogn)
+
+        //For ZigZag pattern- ek baar even ke liye nthLevel aur odd ke lie ulta yani nthLvevel2
+        for(int i=1; i<=level; i++){
+            if(i%2 !=0) nthLevel(root, i);
+            else nthLevel2(root, i);
+            System.out.println();
+        }
 
  
         
