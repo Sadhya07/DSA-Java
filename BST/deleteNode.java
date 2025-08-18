@@ -57,12 +57,27 @@ public class deleteNode {
    
   
     public static void main(String[] args) {
-        String [] arr = {"50","20", "60","17", "34", "55", "89", "10", "", "28", "", "", "", "70", "", "", "14"};
-        Node root= constructbfs(arr);
-        preorder(root);
-        System.out.println();
-        delete(root, 34);
-        preorder(root);
+        String [] a = {"50","20", "60","17", "34", "55", "89", "10", "", "28", "", "", "", "70", "", "", "14"};
+        Node root= constructbfs(a);
+        // preorder(root);
+        // System.out.println();
+        // delete(root, 34);
+        // preorder(root);
+        List<Integer> arr = new ArrayList<>();
+        inorder(root, arr);
+        int val = 60;
+        int idx = -1;
+        for(int i=0; i< arr.size(); i++){
+            if(arr.get(i) ==val){
+                idx = i;
+                break;
+            }
+        }
+        int pred = arr.get(idx-1);
+        int succ = arr.get(idx+1);
+        System.out.println("Predecessor is :" + pred);
+        System.out.println("Sucessor is: " + succ);;
+
 
 
     }
@@ -77,7 +92,7 @@ public class deleteNode {
                     if(l.left != null) root.left = l.left;
                     else root.left = l.right;
                 }else{ //2 child
-                    
+                    Node curr =l;
 
                 }
 
@@ -104,6 +119,15 @@ public class deleteNode {
         preorder(root.left);
         preorder(root.right);
     }
+     public static void inorder(Node root, List<Integer> arr){
+        //pre-order : root left right
+        if(root == null) return;
+        
+        inorder(root.left, arr);
+        arr.add(root.val);
+        inorder(root.right, arr);
+    }
+
 
     
 }
